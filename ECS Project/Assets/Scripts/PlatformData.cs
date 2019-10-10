@@ -9,3 +9,4 @@ public class PlatformData : MonoBehaviour
     public float distancia;
     public PlatformActions platformActions;
 }
+

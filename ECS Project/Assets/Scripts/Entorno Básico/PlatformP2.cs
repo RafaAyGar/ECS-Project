@@ -2,49 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformActions : MonoBehaviour
+public class PlatformP2 : MonoBehaviour
 {
+    //--Public variables --------------------------------------------------------
     public float correctHight;
     public float playerCorrectSize;
     public bool transition;
 
     //--Private variables -------------------------------------------------------
-    Controller player;
+    ControllerP2 player;
     Collider platformCollider;
 
     //--Member Functions Unity --------------------------------------------------
     void Start()
     {
         correctHight = transform.position.y + (transform.localScale.y / 2);
-        player = GameObject.FindObjectOfType<Controller>();
+        player = GameObject.FindObjectOfType<ControllerP2>();
         platformCollider = GetComponent<Collider>();
     }
 
     void Update()
     {
-        if (player != null)
+        if(player != null)
         {
             playerCorrectSize = (player.transform.position.y - (player.transform.localScale.y / 2));
             //Cuando supera la altura establecida de la plataforma, el collider se activa y se hace rígido.
             if (playerCorrectSize > correctHight && !transition)
             {
                 platformCollider.enabled = true;
-                StartCoroutine("Offset");
+                StartCoroutine("Offset");       
             }
             //Cuando el jugador esta debajo se desactiva el collider para que cuando la bola al saltar pase por este, no reconozca que esta tocando el suelo.
-            else if (playerCorrectSize < correctHight - transform.localScale.y && !transition)
+            else if(playerCorrectSize < correctHight - transform.localScale.y && !transition)
             {
                 platformCollider.enabled = false;
             }
             //Cuando se pulsa S, se produce la transición, con la cual la bola se cae de la plataforma atravesándola
-            if (Input.GetKeyDown(KeyCode.S) && player.onFloor && !platformCollider.isTrigger)
+            if(Input.GetKeyDown(KeyCode.S) && player.onFloor && !platformCollider.isTrigger)
             {
                 transition = true;
                 platformCollider.isTrigger = true;
                 StartCoroutine("waitTime");
             }
             //Mientras se realiza la transición, es decir, la bola cae de la plataforma, se le impide saltar, esto se ha hecho porque durante un pequeño lapso de
-            //tiempo, si pulsabas el ESPACIO repetidas veces justo al pulsar S para descender, saltabas y la transición se cancel            if (transition) player.canJ;
+            //tiempo, si pulsabas el ESPACIO repetidas veces justo al pulsar S para descender, saltabas y la transición se cancelaba.
+            if (transition) player.canJump = false;
         }
     }
 

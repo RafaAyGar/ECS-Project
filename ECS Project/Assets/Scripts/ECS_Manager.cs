@@ -14,10 +14,11 @@ public class ECS_Manager : MonoBehaviour
     private void Start()
     {
         entityManager = World.Active.EntityManager;
-        Entity playerEntity = entityManager.CreateEntity(
+        Entity entity = entityManager.CreateEntity(
             typeof(Translation),
             typeof(Player)
         );
+
     }
 
     public struct Platform : IComponentData { };

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformActions : MonoBehaviour
+public class Platform : MonoBehaviour
 {
+    //--Public variables --------------------------------------------------------
     public float correctHight;
     public float playerCorrectSize;
     public bool transition;
@@ -22,7 +23,7 @@ public class PlatformActions : MonoBehaviour
 
     void Update()
     {
-        if (player != null)
+        if(player != null)
         {
             playerCorrectSize = (player.transform.position.y - (player.transform.localScale.y / 2));
             //Cuando supera la altura establecida de la plataforma, el collider se activa y se hace rígido.

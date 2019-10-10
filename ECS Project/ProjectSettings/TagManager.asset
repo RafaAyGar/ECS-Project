@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Floor
+  - Platform
+  - Player1
+  - CentralWall
+  - Player1_Base
+  - Player2
+  - Wall
   layers:
   - Default
   - TransparentFX
